@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 int main()
 {
@@ -10,6 +11,7 @@ int main()
     while (inicio != 1 && inicio != 2) {
         cout << "ingrese un valor valido" << endl;
         cin >> inicio;
+        cout<< endl;
     }
     //Arreglos para almacenar números de tarjeta y códigos PIN predeterminados para efecto del proyecto /////125468754
     string tarjetas[] = { "544" };
@@ -41,16 +43,19 @@ int main()
             }
             else
             {
+                cout << endl;
                 cout << "Acceso denegado. Tarjeta o PIN incorrectos." << endl;
                 // Reducir el contador de intentos restantes
                 intentosRestantes--;
                 // Mostrar los intentos restantes
                 if (intentosRestantes > 0)
                 {
+                    cout << endl;
                     cout << "Te quedan " << intentosRestantes << " intentos restantes." << endl;
                 }
                 else
                 {
+                    cout << endl;
                     cout << "Has agotado tus intentos. Por favor, contacta al banco Nebula para obtener asistencia." << endl;
                     return 0;
                 }
@@ -60,8 +65,10 @@ int main()
         if (accesoPermitido == true)
         {
             float Deposito = 0;
+            
             do 
             {            
+                cout << endl;
                 cout << "Bienvenido estimado cliente de banco Nebula, que transaccion desea realizar?" << endl;
                 cout << "1.-retirar dinero en efectivo" << endl;
                 cout << "2.-realizar depósito" << endl;
@@ -75,39 +82,120 @@ int main()
                     case 1:
                         if (saldo <= 0)
                         {
+                            cout << endl;
                             cout << "su saldo actual es: $" << saldo << ", debe realizar un deposito primero" << endl;
                             string eleccion = " ";
+                            cout << endl;
                             cout << "desea realizar un deposito?" << endl;
                             cin >> eleccion;
                             if (eleccion=="si")
                             {
+                                cout << endl;
                                 cout << "escoja una cantidad a depositar:" << endl;
                                 cout << "$50" << endl; cout << "$100" << endl; cout << "$150" << endl; cout << "$200" << endl; cout << "$400" << endl;
                                 cout << "$"; cin >> Deposito;
                                 saldo = saldo + Deposito;
                             }
-                            else {
-                                cout << "que tenga un buen dia" << endl;       
-                            }
-                            
+                            else
+                            {
+                                cout << endl;
+                                cout << "será enviado de vuelta al menu" << endl;       
+                            }                            
                         }
                         else
-                        {
-                            cout << "xdxdxd" << endl;
+                        {   
+                            float Retiro = 0;
+                            do
+                            {
+                                cout << endl;
+                                cout << "escoja una cantidad a retirar:" << endl;
+                                cout << "$50" << endl; cout << "$100" << endl; cout << "$150" << endl; cout << "$200" << endl; cout << "$400" << endl;
+                                cout << "$"; cin >> Retiro;
+                                if (Retiro > saldo)
+                                {
+                                    cout << endl;
+                                    cout << "Fondos insuficientes. Su saldo actual es: $" << saldo << endl;
+                                }
+                                else if (Retiro == 0)
+                                {
+                                    cout << endl;
+                                    cout << "no se pueden retirar $0" << endl;
+                                }
+                                else
+                                {
+                                    saldo = saldo - Retiro;
+                                    cout << endl;
+                                    cout << "ha retirado con exito $" << Retiro << endl;
+                                    break; // Salir del bucle si el retiro es exitoso
+                                }
+                            } while (true);                               
                         }                        
                         break;
                     case 2:
+                        cout << endl;
                         cout << "escoja una cantidad a depositar:" << endl;
                         cout << "$50" << endl; cout << "$100" << endl; cout << "$150" << endl; cout << "$200" << endl; cout << "$400" << endl;
                         cout << "$"; cin >> Deposito;
                         saldo = saldo + Deposito;
                         break;
                     case 3:
+                        if (saldo <= 0)
+                        {
+                            cout << endl;
+                            cout << "su saldo actual es: $" << saldo << ", debe realizar un deposito primero" << endl;
+                            string eleccion = " ";
+                            cout << "desea realizar un deposito?" << endl;
+                            cin >> eleccion;
+                            if (eleccion == "si")
+                            {
+                                cout << endl;
+                                cout << "escoja una cantidad a depositar:" << endl;
+                                cout << "$50" << endl; cout << "$100" << endl; cout << "$150" << endl; cout << "$200" << endl; cout << "$400" << endl;
+                                cout << "$"; cin >> Deposito;
+                                saldo = saldo + Deposito;
+                            }
+                            else
+                            {
+                                cout << endl;
+                                cout << "será enviado de vuelta al menu" << endl;
+                            }
+                        }
+                        else
+                        {
+                            string PersonaTransferir = " ";
+                            cout << "a quien desea transferir dinero?" << endl; 
+                            cin.ignore();
+                            getline(cin, PersonaTransferir);
+                            int ValorTransferido = 0;
+                            do
+                            {
+                                cout << "por cuanto es el valor de la transferencia?" << " $"; cin >> ValorTransferido;
+                                if (ValorTransferido > saldo)
+                                {
+                                    cout << endl;
+                                    cout << "Fondos insuficientes. Su saldo actual es: $" << saldo << endl;
+                                }
+                                else if (ValorTransferido == 0)
+                                {
+                                    cout << endl;
+                                    cout << "no se pueden transferir $0" << endl;
+                                }
+                                else
+                                {
+                                    saldo = saldo - ValorTransferido;
+                                    cout << endl;
+                                    cout << "ha transferido con exito $" << ValorTransferido << " a " << PersonaTransferir << endl;
+                                    break;
+                                }
+                            } while (true);
+                        }
                         break;
                     case 4:
+                        cout << endl;
                         cout << "su saldo actual es: " << saldo << endl;
                         break;
                     case 5:
+                        cout << endl;
                         cout << "Adios, tenga un buen dia, vuelva pronto" << endl;
                         return 0;
                     default:
@@ -118,6 +206,7 @@ int main()
     }
     else
     {
+        cout << endl;
         cout << "Debe abrir una cuenta en nuestras sucursales primero para utilizar este cajero" << endl;
     }
     system("pause>0");
