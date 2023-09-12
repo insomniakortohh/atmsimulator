@@ -1,0 +1,124 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    float saldo = 0;
+    cout << "Bienvenido a tu cajero de confianza Nebula machine" << endl;
+    cout << " 1.-Soy cliente" << "   2.-No soy cliente" << endl;
+    int inicio = 0;
+    cin >> inicio;
+    while (inicio != 1 && inicio != 2) {
+        cout << "ingrese un valor valido" << endl;
+        cin >> inicio;
+    }
+    //Arreglos para almacenar números de tarjeta y códigos PIN predeterminados para efecto del proyecto /////125468754
+    string tarjetas[] = { "544" };
+    string pines[] = { "1718" };
+    //variables que almacenen la tarjeta y pin ingresado por el usuario
+    string numeroTarjetaIngresado;
+    string pinIngresado;
+    bool accesoPermitido = false;
+    if (inicio == 1)
+    {
+        // Número de intentos restantes
+        int intentosRestantes = 3;
+        while (intentosRestantes > 0)
+        {   
+            //pedir al usuario las variables creadas
+            cout << "Ingrese el número de tarjeta: ";
+            cin >> numeroTarjetaIngresado;
+            cout << "Ingrese el PIN: ";
+            cin >> pinIngresado;           
+            //Verificar si el número de tarjeta y el PIN coinciden
+            for (size_t i = 0; i < sizeof(tarjetas) / sizeof(tarjetas[0]) && i < sizeof(pines) / sizeof(pines[0]); ++i) {
+                if (tarjetas[i] == numeroTarjetaIngresado && pines[i] == pinIngresado) {
+                    accesoPermitido = true;
+                }
+            }
+            if (accesoPermitido)
+            {
+                break;
+            }
+            else
+            {
+                cout << "Acceso denegado. Tarjeta o PIN incorrectos." << endl;
+                // Reducir el contador de intentos restantes
+                intentosRestantes--;
+                // Mostrar los intentos restantes
+                if (intentosRestantes > 0)
+                {
+                    cout << "Te quedan " << intentosRestantes << " intentos restantes." << endl;
+                }
+                else
+                {
+                    cout << "Has agotado tus intentos. Por favor, contacta al banco Nebula para obtener asistencia." << endl;
+                    return 0;
+                }
+            }            
+        }       
+        //verificar si el acceso ha sido otorgado
+        if (accesoPermitido == true)
+        {
+            float Deposito = 0;
+            do 
+            {            
+                cout << "Bienvenido estimado cliente de banco Nebula, que transaccion desea realizar?" << endl;
+                cout << "1.-retirar dinero en efectivo" << endl;
+                cout << "2.-realizar depósito" << endl;
+                cout << "3.-transferencia" << endl;
+                cout << "4.-consultar saldo" << endl;
+                cout << "5.-Salir" << endl;
+                int OpcionMenu = 0;
+                cin >> OpcionMenu;
+                switch (OpcionMenu)
+                {
+                    case 1:
+                        if (saldo <= 0)
+                        {
+                            cout << "su saldo actual es: $" << saldo << ", debe realizar un deposito primero" << endl;
+                            string eleccion = " ";
+                            cout << "desea realizar un deposito?" << endl;
+                            cin >> eleccion;
+                            if (eleccion=="si")
+                            {
+                                cout << "escoja una cantidad a depositar:" << endl;
+                                cout << "$50" << endl; cout << "$100" << endl; cout << "$150" << endl; cout << "$200" << endl; cout << "$400" << endl;
+                                cout << "$"; cin >> Deposito;
+                                saldo = saldo + Deposito;
+                            }
+                            else {
+                                cout << "que tenga un buen dia" << endl;       
+                            }
+                            
+                        }
+                        else
+                        {
+                            cout << "xdxdxd" << endl;
+                        }                        
+                        break;
+                    case 2:
+                        cout << "escoja una cantidad a depositar:" << endl;
+                        cout << "$50" << endl; cout << "$100" << endl; cout << "$150" << endl; cout << "$200" << endl; cout << "$400" << endl;
+                        cout << "$"; cin >> Deposito;
+                        saldo = saldo + Deposito;
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        cout << "su saldo actual es: " << saldo << endl;
+                        break;
+                    case 5:
+                        cout << "Adios, tenga un buen dia, vuelva pronto" << endl;
+                        return 0;
+                    default:
+                        break;
+                }
+            } while (true);
+        }                            
+    }
+    else
+    {
+        cout << "Debe abrir una cuenta en nuestras sucursales primero para utilizar este cajero" << endl;
+    }
+    system("pause>0");
+}
